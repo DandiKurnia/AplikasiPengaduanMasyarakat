@@ -21,7 +21,15 @@
                 <p>Nama : {{ $data->user->name }}</p>
                 <p>NIK : {{ $data->user->nik }}</p>
                 <p>Tanggal Pengaduan : {{ $data->tgl_pengaduan->format('l, F Y') }}</p>
-                <p>Status :</p>
+                <div class="d-flex align-items-center">
+                    @if ($data->status == 0)
+                        <p class="mr-1">Status :</p><p class="bg-secondary text-gray-100" style="padding: 3px; border-radius: 0.25rem">pending</p>
+                    @elseif ($data->status == 'proses')
+                        <p class="mr-1">Status :</p><p class="bg-warning text-gray-100" style="padding: 3px; border-radius: 0.25rem">{{ $data->status }}</p>    
+                    @elseif ($data->status == 'selesai')
+                        <p class="mr-1">Status :</p><p class="bg-success text-gray-100" style="padding: 3px; border-radius: 0.25rem">{{ $data->status }}</p>
+                    @endif
+                </div>
             </div>
         </div>
     </div>

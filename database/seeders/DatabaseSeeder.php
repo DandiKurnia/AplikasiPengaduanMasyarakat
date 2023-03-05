@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Masyarakat;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -28,6 +29,14 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@admin.com',
             'password' => bcrypt('12345'),
             'level' => 'admin'
+        ]);
+
+        Masyarakat::create([
+            'name' => 'kubu',
+            'nik' => '1234567890123455',
+            'username' => 'kubu12',
+            'password' => bcrypt('123456'),
+            'telp' => '123123'
         ]);
     }
 }

@@ -7,6 +7,13 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+        $this->middleware('guest:masyarakat')->except('logout');
+    }
+    
     public function index(){
         return view('auth.login');
     }
@@ -38,6 +45,6 @@ class LoginController extends Controller
         request()->session()->invalidate();
 
         request()->session()->regenerateToken();
-        return redirect('/login')->with('logout', 'Logout Success !!');
+        return redirect('/login/admin')->with('logout', 'Logout Success !!');
     }
 }

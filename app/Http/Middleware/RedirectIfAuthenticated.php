@@ -17,9 +17,17 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, string ...$guards): Response
     {
+        // if ($guards == "masyarakat" && Auth::guard($guards)->check()) {
+        //     return redirect('/pengaduan');
+        // }
+        
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
+            if ($guard == "masyarakat" && Auth::guard($guard)->check()) {
+                return redirect('/pengaduan');
+            }
+
             if (Auth::guard($guard)->check()) {
                 return redirect(RouteServiceProvider::HOME);
             }

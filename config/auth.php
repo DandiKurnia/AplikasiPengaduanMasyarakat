@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'masyarakat'  => [
+            'driver'  => 'session',
+            'provider' => 'masyarakats',
+        ],
     ],
 
     /*
@@ -63,6 +67,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+        'masyarakats' => [
+            'driver' => 'eloquent',
+            'model'  => App\Models\Masyarakat::class,
         ],
 
         // 'users' => [
@@ -93,6 +101,12 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'masyarakats' => [
+            'provider' => 'masyarakats',
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,

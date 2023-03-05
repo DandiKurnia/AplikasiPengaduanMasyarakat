@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class PengaduanController extends Controller
 {
@@ -37,12 +38,21 @@ class PengaduanController extends Controller
             'foto' => 'required',
         ]);
 
-        $data = Pengaduan::create([
-            'tgl_pengaduan' => Carbon::now(),
-            'user_id' => auth()->user()->id,
-            'isi_laporan' => $request->isi_laporan,
-            'foto' => $request->foto,
-        ]);
+        if (Auth::guard('masyarakat')->user()) {
+            $data = Pengaduan::create([
+                'tgl_pengaduan' => Carbon::now(),
+                'user_id' => Auth::guard('masyarakat')->user()->id,
+                'isi_laporan' => $request->isi_laporan,
+                'foto' => $request->foto,
+            ]);
+        }else{
+            $data = Pengaduan::create([
+                'tgl_pengaduan' => Carbon::now(),
+                'user_id' => auth()->user()->id,
+                'isi_laporan' => $request->isi_laporan,
+                'foto' => $request->foto,
+            ]);
+        }
 
         if ($request->hasFile('foto')) {
             $request->file('foto')->move('foto/', $request->file('foto')->getClientOriginalName());

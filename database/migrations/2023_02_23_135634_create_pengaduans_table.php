@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('pengaduans', function (Blueprint $table) {
             $table->id();
+            // $table->bigInteger('user_id')->unsigned();
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->date('tgl_pengaduan');
-            $table->foreignId('user_id');
             $table->text('isi_laporan');
             $table->string('foto');
             $table->enum('status',[0,'reject','approve','proses','selesai'])->default(0);
