@@ -11,14 +11,16 @@ class Masyarakat extends Authenticatable
 {
     use Notifiable;
 
-    protected $guard = 'masyarakat';
+    // protected $guard = 'masyarakat';
 
-    protected $fillable = [
-        'name', 'username', 'password','nik','telp'
-    ];
+    protected $guarded = ['id'];
 
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function pengaduan(){
+        return $this->hasMany(Pengaduan::class);
+    }
 
 }

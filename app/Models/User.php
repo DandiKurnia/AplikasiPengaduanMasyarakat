@@ -17,6 +17,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $table = 'users';
     protected $guarded = ['id'];
 
 
@@ -39,7 +40,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function pengaduan(){
-        return $this->hasMany(Pengaduan::class);
+    public function tanggapan()
+    {
+        return $this->hasMany(Tanggapan::class);
     }
 }

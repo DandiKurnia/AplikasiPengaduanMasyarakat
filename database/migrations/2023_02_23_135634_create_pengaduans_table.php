@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('pengaduans', function (Blueprint $table) {
             $table->id();
-            // $table->bigInteger('user_id')->unsigned();
-            $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('masyarakat_id')->references('id')->on('masyarakats');
+            $table->string('judul_laporan');
             $table->date('tgl_pengaduan');
             $table->text('isi_laporan');
             $table->string('foto');

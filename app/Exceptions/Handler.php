@@ -48,17 +48,6 @@ class Handler extends ExceptionHandler
         });
     }
 
-    // protected function unauthenticated($request, AuthenticationException $exception)
-    // {
-    //     if ($request->expectsJson()) {
-    //         return response()->json(['error' => 'Unauthenticated.'], 401);
-    //     }
-    //     if ($request->is('masyarakat') || $request->is('masyarakat/*')) {
-    //         return redirect()->guest('/pengaduan');
-    //     }
-    //     return redirect()->guest(route('login'));
-    // }
-
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         if ($request->expectsJson()) {

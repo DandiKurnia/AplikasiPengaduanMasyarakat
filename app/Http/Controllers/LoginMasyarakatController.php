@@ -38,6 +38,7 @@ class LoginMasyarakatController extends Controller
         }
         return back()->with('loginError', 'Login Failed!!');
     }
+    
     public function logout(Request $request)
     {
         Auth::logout();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pengaduan;
+use App\Models\Tanggapan;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class PengaduanController extends Controller
     public function index(): Response
     {
         $data = Pengaduan::all();
-        return response()->view('masyarakat.pengaduan', compact('data'));
+    return response()->view('admin.pengaduan', compact('data'));
     }
 
     /**
@@ -70,8 +71,8 @@ class PengaduanController extends Controller
     public function show(Pengaduan $pengaduan): Response
     {
         $data = Pengaduan::findOrFail($pengaduan->id);
-        
-        return response()->view('admin.showpengaduan',compact('data'));
+        $tanggapan = Tanggapan::where('pengaduans_id',$pengaduan->id)->with(['users','pengaduans'])->get();
+        return response()->view('admin.showpengaduan',compact('data','tanggapan'));
     }
 
     /**
@@ -96,5 +97,46 @@ class PengaduanController extends Controller
     public function destroy(Pengaduan $pengaduan): RedirectResponse
     {
         //
+    }
+
+    public function pengaduanMasuk(){
+        $data = Pengaduan::where('status','0')->paginate(25);
+        return view('admin.pengaduanmasuk',compact('data'));
+    }
+
+    public function pengaduanTolak(){
+        $data = Pengaduan::where('status','reject')->paginate(25);
+        return view('admin.pengaduantolak',compact('data'));
+    }
+    
+    public function pengaduanTerima(){
+        $data = Pengaduan::where('status','approve')->paginate(25);
+        return view('admin.pengaduanterima',compact('data'))->with('success', 'Laporan ditermia!');
+    }
+
+    public function pengaduanProses(){
+        $data = Pengaduan::where('status','proses')->paginate(25);
+        return view('admin.pengaduanproses',compact('data'));
+    }
+
+    public function pengaduanSelesai(){
+        $data = Pengaduan::where('status','selesai')->paginate(25);
+        return view('admin.pengaduanselesai',compact('data'));
+    }
+
+    public function approve($id)
+    {
+        Pengaduan::where('id',$id)->update([
+            'status' => 'approve'
+        ]);
+        return redirect('/admin/pengaduan-terima');
+    }
+
+    public function reject($id)
+    {
+        Pengaduan::where('id',$id)->update([
+            'status' => 'reject'
+        ]);
+        return redirect('/admin/pengaduan-tolak');
     }
 }

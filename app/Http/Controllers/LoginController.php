@@ -21,7 +21,7 @@ class LoginController extends Controller
     public function authenticate(Request $request)
     {
         $credentials = $request->validate([
-            'email' => 'required',
+            'username' => 'required',
             'password' => 'required'
         ]);
         $remember = $request->has('remember');
@@ -29,11 +29,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials,$remember)) {
             $user = auth()->user();
             $request->session()->regenerate();
-            if ($user->level == 'admin') {
-                return redirect()->intended('/')->with('login', 'Login Success !!');
-            } elseif ($user->level == 'masyarakat') {
-                return redirect()->intended('/')->with('login', 'Login Success !!');
-            }
+            return redirect()->intended('/dashboard')->with('login', 'Login Success !!');
         }
         return back()->with('loginError', 'Login Failed!!');
     }

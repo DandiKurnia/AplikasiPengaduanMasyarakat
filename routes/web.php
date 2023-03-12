@@ -4,7 +4,10 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LoginMasyarakatController;
 use App\Http\Controllers\PengaduanController;
+use App\Http\Controllers\PengaduanMasyarakatController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\TanggapanController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -18,16 +21,28 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::resource('pengaduan', PengaduanController::class);
 Route::group(['middleware' => 'IsMasyarakat'], function () {
+    Route::get('daftar-pengaduan', [PengaduanMasyarakatController::class, 'pengaduan']);
+    Route::resource('pengaduan', PengaduanMasyarakatController::class);
     // logout Masyarakat
-    Route::post('/logout',[LoginMasyarakatController::class, 'logout']);
+    Route::post('logout',[LoginMasyarakatController::class, 'logout']);
 });
 
 Route::group(['middleware' => ['auth']], function(){
-    Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::resource('admin/pengaduan', PengaduanController::class);
+    Route::get('admin/pengaduan-masuk', [PengaduanController::class,'pengaduanMasuk']);
+    Route::get('admin/pengaduan-tolak', [PengaduanController::class,'pengaduantolak']);
+    Route::get('admin/pengaduan-terima', [PengaduanController::class,'pengaduanterima']);
+    Route::get('admin/pengaduan-proses', [PengaduanController::class,'pengaduanProses']);
+    Route::get('admin/pengaduan-selesai', [PengaduanController::class,'pengaduanSelesai']);
+    Route::post('tanggapan/{pengaduan_id}', [TanggapanController::class, 'updateTanggapan']);
+    Route::resource('tanggapan', TanggapanController::class);
 
-    // logout Admin/Petugas
+    Route::get('admin/pengaduan-masuk/approve/{id}', [PengaduanController::class, 'approve']);
+    Route::get('admin/pengaduan-masuk/reject/{id}', [PengaduanController::class, 'reject']);
+
+    Route::resource('user', UserController::class);
+    Route::get('dashboard', [DashboardController::class, 'index']);
     Route::post('logout/admin', [LoginController::class, 'logout'])->name('logout');
 });
 

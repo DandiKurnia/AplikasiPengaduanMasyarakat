@@ -81,11 +81,11 @@
                                       @enderror
                                   </div>
                                   <div class="col-sm-6">
-                                      <input type="number" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Telepon" name="telpon">
+                                      <input type="number" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Telepon" name="telp">
                                   </div>
                               </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email Address" name="email">
+                                    <input type="text" class="form-control form-control-user" id="exampleInputEmail" placeholder="Username" name="username">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">

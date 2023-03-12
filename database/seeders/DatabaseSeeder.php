@@ -24,11 +24,18 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'admin',
-            'nik' => '1234567890123455',
-            'telpon' => '12312312',
-            'email' => 'admin@admin.com',
+            'telp' => '12312312',
+            'username' => 'admin',
             'password' => bcrypt('12345'),
             'level' => 'admin'
+        ]);
+
+        User::create([
+            'name' => 'petugas',
+            'telp' => '12312312',
+            'username' => 'petugas',
+            'password' => bcrypt('12345'),
+            'level' => 'petugas'
         ]);
 
         Masyarakat::create([

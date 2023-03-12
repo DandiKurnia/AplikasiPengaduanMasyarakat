@@ -17,8 +17,13 @@ class Pengaduan extends Model
         'tgl_pengaduan' => 'datetime',
     ];
 
-    public function user()
+    public function masyarakat()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Masyarakat::class);
+    }
+
+    public function tanggapan()
+    {
+        return $this->hasMany(Tanggapan::class);
     }
 }
