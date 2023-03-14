@@ -40,8 +40,10 @@ Route::group(['middleware' => ['auth']], function(){
 
     Route::get('admin/pengaduan-masuk/approve/{id}', [PengaduanController::class, 'approve']);
     Route::get('admin/pengaduan-masuk/reject/{id}', [PengaduanController::class, 'reject']);
-
-    Route::resource('user', UserController::class);
+    
+    Route::group(['middleware' => ['admin']], function () {
+        Route::resource('user', UserController::class);
+    });
     Route::get('dashboard', [DashboardController::class, 'index']);
     Route::post('logout/admin', [LoginController::class, 'logout'])->name('logout');
 });
