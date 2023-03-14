@@ -53,8 +53,6 @@
                         @endforelse
                 </table>
                 {{ $data->links() }}
-                {{-- <div class="d-flex justify-content-end mt-2 me-lg-3 me-2">
-                </div> --}}
             </div>
         </div>
     </div>

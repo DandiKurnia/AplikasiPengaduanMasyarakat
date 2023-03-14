@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ExportpdfController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LoginMasyarakatController;
 use App\Http\Controllers\PengaduanController;
@@ -41,6 +42,8 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('admin/pengaduan-masuk/approve/{id}', [PengaduanController::class, 'approve']);
     Route::get('admin/pengaduan-masuk/reject/{id}', [PengaduanController::class, 'reject']);
     
+    Route::get('exportpdf', [ExportpdfController::class, 'index']);
+    Route::post('/export-pdf', [ExportpdfController::class, 'exportPdf'])->name('export.pdf');
     Route::group(['middleware' => ['admin']], function () {
         Route::resource('user', UserController::class);
     });

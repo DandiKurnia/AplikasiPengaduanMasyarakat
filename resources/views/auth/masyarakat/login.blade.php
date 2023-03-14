@@ -41,6 +41,14 @@
                                         </button>
                                     </div>
                                 @endif
+                                @if (session()->has('success'))
+                                    <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+                                        {{ session('success') }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                @endif
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
@@ -70,7 +78,7 @@
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                        {{-- <a class="small" href="forgot-password.html">Forgot Password?</a> --}}
                                     </div>
                                     <div class="text-center">
                                         <a class="small" href="/register">Create an Account!</a>

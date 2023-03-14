@@ -2,6 +2,16 @@
 
 @section('content')
 <div class="col-lg-12">
+    @if(count($errors)>0)
+        <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <div class="card">
         <div class="card-body">
             <form action="{{ url('pengaduan') }}" method="POST" enctype="multipart/form-data">
